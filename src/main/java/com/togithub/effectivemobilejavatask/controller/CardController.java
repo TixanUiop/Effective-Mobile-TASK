@@ -8,6 +8,7 @@ import com.togithub.effectivemobilejavatask.service.CardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
@@ -21,29 +22,26 @@ public class CardController {
     private final CardService cardService;
 
     //TODO USER + SEARCH && PAG
+    @PreAuthorize("hasRole('USER')")
     @GetMapping
     public Page<CardDTO> getCards(Pageable pageable, @RequestParam Long userId) {
         return cardService.getCardsByUser(userId, pageable);
     }
 
-    //TODO USER
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/requestForBlockingCards")
     public RequestForBlockingDTO  requestForBlockingCards(@Valid @RequestBody RequestForBlockingDTO dto) {
         return cardService.SaveRequestForBlocking(dto);
     }
 
-    @GetMapping("/{id}")
-    public CardDTO getCard(@PathVariable Long id) {
-        return cardService.getCardById(id);
-    }
 
-    //TODO ADMIN
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public List<CardDTO> getAllCards() {
         return cardService.findAll();
     }
 
-    //TODO ADMIN
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<CardDTO> createCard(@RequestBody CardDTO cardDTO,
                                               Authentication authentication) {
@@ -52,14 +50,14 @@ public class CardController {
         return ResponseEntity.ok(saved);
     }
 
-    //TODO ADMIN
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public CardDTO updateCard(@PathVariable Long id, @RequestBody CardDTO card) {
         card.setId(id);
         return cardService.updateCard(card);
     }
 
-    //TODO ADMIN
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteCard(@PathVariable Long id) {
         cardService.deleteCard(id);

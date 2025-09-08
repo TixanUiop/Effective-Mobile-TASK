@@ -1,15 +1,30 @@
 package com.togithub.effectivemobilejavatask.mapper;
 
 import com.togithub.effectivemobilejavatask.dto.CardDTO;
+import com.togithub.effectivemobilejavatask.dto.UserCreateDTO;
 import com.togithub.effectivemobilejavatask.dto.UserDTO;
 import com.togithub.effectivemobilejavatask.entity.Card;
 import com.togithub.effectivemobilejavatask.entity.CardStatus;
+import com.togithub.effectivemobilejavatask.entity.Role;
 import com.togithub.effectivemobilejavatask.entity.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 //will not use MapStruct.
 @Component
+@RequiredArgsConstructor
 public class Mapper {
+
+    private final PasswordEncoder passwordEncoder;
+
+    public User toUserFromUserCreateDTO(UserCreateDTO userCreateDTO) {
+        return User.builder()
+                .username(userCreateDTO.getUsername())
+                .password(passwordEncoder.encode(userCreateDTO.getPassword()))
+                .role(Role.valueOf(userCreateDTO.getRole()))
+                .build();
+    }
 
 
     public CardDTO toCardDTO(Card card) {
