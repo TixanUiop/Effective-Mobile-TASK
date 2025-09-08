@@ -3,6 +3,7 @@ package com.togithub.effectivemobilejavatask.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -11,9 +12,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "cards")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
 public class Card extends BaseEntity {
 
 
