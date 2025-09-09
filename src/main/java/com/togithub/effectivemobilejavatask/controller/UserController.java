@@ -1,10 +1,9 @@
 package com.togithub.effectivemobilejavatask.controller;
 
-import com.togithub.effectivemobilejavatask.dto.CreateUserDTO;
-import com.togithub.effectivemobilejavatask.dto.UpdateUserDTO;
-import com.togithub.effectivemobilejavatask.dto.UserDTO;
-import com.togithub.effectivemobilejavatask.entity.User;
-import com.togithub.effectivemobilejavatask.service.UserService;
+import com.togithub.effectivemobilejavatask.dto.user.CreateUserDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UpdateUserDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UserDTO;
+import com.togithub.effectivemobilejavatask.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

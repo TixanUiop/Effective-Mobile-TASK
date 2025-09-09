@@ -8,4 +8,5 @@
 
     <include file="db/changelog/V1__create_tables.sql"/>
     <include file="db/changelog/V2__insert_test_data.sql"/>
+    <include file="db/changelog/V3__create_request_for_blockingables.sql"/>
 </databaseChangeLog>

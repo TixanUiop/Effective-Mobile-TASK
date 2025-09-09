@@ -1,4 +1,4 @@
-package com.togithub.effectivemobilejavatask.dto;
+package com.togithub.effectivemobilejavatask.dto.transcational;
 
 import com.togithub.effectivemobilejavatask.entity.Card;
 import lombok.AllArgsConstructor;

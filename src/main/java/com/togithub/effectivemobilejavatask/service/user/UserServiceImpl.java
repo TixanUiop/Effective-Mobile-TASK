@@ -1,8 +1,8 @@
-package com.togithub.effectivemobilejavatask.service;
+package com.togithub.effectivemobilejavatask.service.user;
 
-import com.togithub.effectivemobilejavatask.dto.CreateUserDTO;
-import com.togithub.effectivemobilejavatask.dto.UpdateUserDTO;
-import com.togithub.effectivemobilejavatask.dto.UserDTO;
+import com.togithub.effectivemobilejavatask.dto.user.CreateUserDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UpdateUserDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UserDTO;
 import com.togithub.effectivemobilejavatask.entity.User;
 import com.togithub.effectivemobilejavatask.mapper.Mapper;
 import com.togithub.effectivemobilejavatask.repository.UserRepository;

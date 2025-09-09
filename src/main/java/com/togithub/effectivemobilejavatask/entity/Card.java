@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
+@ToString(exclude = "user")
 public class Card extends BaseEntity {
 
 

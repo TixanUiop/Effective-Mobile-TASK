@@ -1,7 +1,7 @@
-package com.togithub.effectivemobilejavatask.service;
+package com.togithub.effectivemobilejavatask.service.auth;
 
-import com.togithub.effectivemobilejavatask.dto.UserCreateDTO;
-import com.togithub.effectivemobilejavatask.dto.UserLoginDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UserCreateDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UserLoginDTO;
 import com.togithub.effectivemobilejavatask.entity.User;
 import com.togithub.effectivemobilejavatask.mapper.Mapper;
 import com.togithub.effectivemobilejavatask.repository.UserRepository;
@@ -26,6 +26,7 @@ public class AuthServiceImpl implements AuthService {
 
     public String register(UserCreateDTO dto) {
         if (userRepository.findByUsername(dto.getUsername()).isPresent()) {
+            log.info("Username is already in use");
             throw new RuntimeException("User already exists");
         }
 
@@ -41,6 +42,7 @@ public class AuthServiceImpl implements AuthService {
                     new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword())
             );
         } catch (Exception e) {
+            log.error(e.getMessage());
             throw new RuntimeException("Invalid credentials");
         }
 

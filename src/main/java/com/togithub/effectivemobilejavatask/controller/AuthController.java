@@ -1,8 +1,8 @@
 package com.togithub.effectivemobilejavatask.controller;
 
-import com.togithub.effectivemobilejavatask.dto.UserCreateDTO;
-import com.togithub.effectivemobilejavatask.dto.UserLoginDTO;
-import com.togithub.effectivemobilejavatask.service.AuthService;
+import com.togithub.effectivemobilejavatask.dto.user.UserCreateDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UserLoginDTO;
+import com.togithub.effectivemobilejavatask.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

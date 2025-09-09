@@ -1,6 +1,7 @@
 package com.togithub.effectivemobilejavatask.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.togithub.effectivemobilejavatask.entity.Enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@ToString(exclude = "cards")
 public class User extends BaseEntity {
 
     private String username;
@@ -24,5 +26,6 @@ public class User extends BaseEntity {
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private List<Card> cards;
 }

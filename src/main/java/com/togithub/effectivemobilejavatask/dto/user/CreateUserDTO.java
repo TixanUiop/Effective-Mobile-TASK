@@ -1,4 +1,5 @@
-package com.togithub.effectivemobilejavatask.dto;
+package com.togithub.effectivemobilejavatask.dto.user;
+
 
 import com.togithub.effectivemobilejavatask.entity.Enums.Role;
 import lombok.AllArgsConstructor;
@@ -10,11 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateUserDTO {
-
-    private Long id;
+public class CreateUserDTO {
     private String username;
     private String password;
+
     private Role role;
 
 }

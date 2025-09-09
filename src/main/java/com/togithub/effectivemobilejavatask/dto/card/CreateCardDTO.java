@@ -1,5 +1,6 @@
-package com.togithub.effectivemobilejavatask.dto;
+package com.togithub.effectivemobilejavatask.dto.card;
 
+import com.togithub.effectivemobilejavatask.dto.user.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CardDTO {
-    private Long id;
+public class CreateCardDTO {
     private String number;
     private String owner;
     private LocalDate expiryDate;

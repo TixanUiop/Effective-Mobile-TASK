@@ -1,6 +1,11 @@
 package com.togithub.effectivemobilejavatask.mapper;
 
-import com.togithub.effectivemobilejavatask.dto.*;
+import com.togithub.effectivemobilejavatask.dto.card.CardDTO;
+import com.togithub.effectivemobilejavatask.dto.card.CreateCardDTO;
+import com.togithub.effectivemobilejavatask.dto.user.CreateUserDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UpdateUserDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UserCreateDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UserDTO;
 import com.togithub.effectivemobilejavatask.entity.Card;
 import com.togithub.effectivemobilejavatask.entity.Enums.CardStatus;
 import com.togithub.effectivemobilejavatask.entity.Enums.Role;

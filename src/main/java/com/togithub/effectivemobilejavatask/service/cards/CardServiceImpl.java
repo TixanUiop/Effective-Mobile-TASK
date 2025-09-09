@@ -1,11 +1,10 @@
-package com.togithub.effectivemobilejavatask.service;
+package com.togithub.effectivemobilejavatask.service.cards;
 
-import com.togithub.effectivemobilejavatask.dto.CardDTO;
-import com.togithub.effectivemobilejavatask.dto.CreateCardDTO;
+import com.togithub.effectivemobilejavatask.dto.card.CardDTO;
+import com.togithub.effectivemobilejavatask.dto.card.CreateCardDTO;
 import com.togithub.effectivemobilejavatask.dto.RequestForBlockingDTO;
-import com.togithub.effectivemobilejavatask.dto.UserDTO;
+import com.togithub.effectivemobilejavatask.dto.user.UserDTO;
 import com.togithub.effectivemobilejavatask.entity.Card;
-import com.togithub.effectivemobilejavatask.entity.Enums.CardStatus;
 import com.togithub.effectivemobilejavatask.entity.RequestForBlocking;
 import com.togithub.effectivemobilejavatask.entity.User;
 import com.togithub.effectivemobilejavatask.mapper.Mapper;
@@ -19,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -65,6 +63,11 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public List<RequestForBlockingDTO> getAllRequestForBlocking() {
+        return cardRepository.findAllRequestForBlockingDTO();
+    }
+
+    @Override
     public List<CardDTO> findAllCardsUserByUsername(String username) {
         return cardRepository.findCardsByUsername(username)
                 .stream()
@@ -93,11 +96,21 @@ public class CardServiceImpl implements CardService {
         return cardDTO;
     }
 
+
     @Override
     public CardDTO getCardById(Long id) {
         return cardRepository.findById(id)
                 .map(mapper::toCardDTO)
                 .orElseThrow(() -> new RuntimeException("Card not found"));
+    }
+
+    public Page<CardDTO> getCardsByUser(Long userId, String number, Pageable pageable) {
+        if (number != null && !number.isBlank()) {
+            return cardRepository.findByUserIdAndNumberContainingIgnoreCase(userId, number, pageable)
+                    .map(mapper::toCardDTO);
+        }
+        return cardRepository.findByUserId(userId, pageable)
+                .map(mapper::toCardDTO);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.togithub.effectivemobilejavatask.dto;
+package com.togithub.effectivemobilejavatask.dto.user;
 
 
 import lombok.AllArgsConstructor;

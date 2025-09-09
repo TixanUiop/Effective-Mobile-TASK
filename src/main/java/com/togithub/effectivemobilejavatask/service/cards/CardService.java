@@ -1,7 +1,7 @@
-package com.togithub.effectivemobilejavatask.service;
+package com.togithub.effectivemobilejavatask.service.cards;
 
-import com.togithub.effectivemobilejavatask.dto.CardDTO;
-import com.togithub.effectivemobilejavatask.dto.CreateCardDTO;
+import com.togithub.effectivemobilejavatask.dto.card.CardDTO;
+import com.togithub.effectivemobilejavatask.dto.card.CreateCardDTO;
 import com.togithub.effectivemobilejavatask.dto.RequestForBlockingDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,5 +17,6 @@ public interface CardService {
     void deleteCard(Long id);
     List<CardDTO> findAll();
     RequestForBlockingDTO SaveRequestForBlocking(RequestForBlockingDTO dto);
-
+    List<RequestForBlockingDTO> getAllRequestForBlocking();
+    Page<CardDTO> getCardsByUser(Long userId, String number, Pageable pageable);
 }
