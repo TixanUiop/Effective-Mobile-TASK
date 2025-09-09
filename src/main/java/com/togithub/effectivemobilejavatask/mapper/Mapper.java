@@ -1,11 +1,9 @@
 package com.togithub.effectivemobilejavatask.mapper;
 
-import com.togithub.effectivemobilejavatask.dto.CardDTO;
-import com.togithub.effectivemobilejavatask.dto.UserCreateDTO;
-import com.togithub.effectivemobilejavatask.dto.UserDTO;
+import com.togithub.effectivemobilejavatask.dto.*;
 import com.togithub.effectivemobilejavatask.entity.Card;
-import com.togithub.effectivemobilejavatask.entity.CardStatus;
-import com.togithub.effectivemobilejavatask.entity.Role;
+import com.togithub.effectivemobilejavatask.entity.Enums.CardStatus;
+import com.togithub.effectivemobilejavatask.entity.Enums.Role;
 import com.togithub.effectivemobilejavatask.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +16,15 @@ public class Mapper {
 
     private final PasswordEncoder passwordEncoder;
 
+    public User UpdateUserDTOToUser(UpdateUserDTO dto) {
+        return User.builder()
+                .role(dto.getRole())
+                .id(dto.getId())
+                .password(passwordEncoder.encode(dto.getPassword()))
+                .username(dto.getUsername())
+                .build();
+    }
+
     public User toUserFromUserCreateDTO(UserCreateDTO userCreateDTO) {
         return User.builder()
                 .username(userCreateDTO.getUsername())
@@ -26,6 +33,13 @@ public class Mapper {
                 .build();
     }
 
+    public User toUserForCreateDTO(CreateUserDTO createUserDTO) {
+        return User.builder()
+                .role(createUserDTO.getRole())
+                .username(createUserDTO.getUsername())
+                .password(passwordEncoder.encode(createUserDTO.getPassword()))
+                .build();
+    }
 
     public CardDTO toCardDTO(Card card) {
         return CardDTO.builder()
@@ -35,12 +49,23 @@ public class Mapper {
                 .expiryDate(card.getExpiryDate())
                 .status(card.getStatus().name())
                 .balance(card.getBalance())
+                .user(toUserDTO(card.getUser()))
                 .build();
     }
 
     public Card toCard(CardDTO cardDTO) {
         return Card.builder()
                 .id(cardDTO.getId())
+                .number(maskCardNumber(cardDTO.getNumber()))
+                .owner(cardDTO.getOwner())
+                .expiryDate(cardDTO.getExpiryDate())
+                .status(CardStatus.valueOf(cardDTO.getStatus()))
+                .balance(cardDTO.getBalance())
+                .build();
+    }
+
+    public Card toCard(CreateCardDTO cardDTO) {
+        return Card.builder()
                 .number(maskCardNumber(cardDTO.getNumber()))
                 .owner(cardDTO.getOwner())
                 .expiryDate(cardDTO.getExpiryDate())

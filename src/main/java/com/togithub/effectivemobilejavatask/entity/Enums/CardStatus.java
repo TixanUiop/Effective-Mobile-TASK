@@ -1,4 +1,4 @@
-package com.togithub.effectivemobilejavatask.entity;
+package com.togithub.effectivemobilejavatask.entity.Enums;
 
 
 public enum CardStatus {

@@ -12,8 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CardDTO {
-    private Long id;
+public class CreateCardDTO {
     private String number;
     private String owner;
     private LocalDate expiryDate;

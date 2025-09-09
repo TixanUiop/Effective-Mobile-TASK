@@ -1,10 +1,11 @@
 package com.togithub.effectivemobilejavatask.service;
 
 import com.togithub.effectivemobilejavatask.dto.CardDTO;
+import com.togithub.effectivemobilejavatask.dto.CreateCardDTO;
 import com.togithub.effectivemobilejavatask.dto.RequestForBlockingDTO;
 import com.togithub.effectivemobilejavatask.dto.UserDTO;
 import com.togithub.effectivemobilejavatask.entity.Card;
-import com.togithub.effectivemobilejavatask.entity.CardStatus;
+import com.togithub.effectivemobilejavatask.entity.Enums.CardStatus;
 import com.togithub.effectivemobilejavatask.entity.RequestForBlocking;
 import com.togithub.effectivemobilejavatask.entity.User;
 import com.togithub.effectivemobilejavatask.mapper.Mapper;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,28 +65,32 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<CardDTO> findAll() {
-        return cardRepository.findAll()
+    public List<CardDTO> findAllCardsUserByUsername(String username) {
+        return cardRepository.findCardsByUsername(username)
                 .stream()
-                .map(item -> mapper.toCardDTO(item))
+                .map(mapper::toCardDTO)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CardDTO createCard(CardDTO dto, String username) {
+    public List<CardDTO> findAll() {
+        return cardRepository.findAll()
+                .stream()
+                .map(mapper::toCardDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CardDTO createCard(CreateCardDTO cardDto, String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+        Card card = mapper.toCard(cardDto);
+        card.setUser(user);
 
-        Card card = Card.builder()
-                .number(dto.getNumber())
-                .owner(dto.getOwner())
-                .expiryDate(dto.getExpiryDate())
-                .status(CardStatus.valueOf(dto.getStatus()))
-                .balance(dto.getBalance())
-                .user(user)
-                .build();
-
-        return mapper.toCardDTO(cardRepository.save(card));
+        CardDTO cardDTO = mapper.toCardDTO(cardRepository.save(card));
+        UserDTO userDTO = mapper.toUserDTO(user);
+        cardDTO.setUser(userDTO);
+        return cardDTO;
     }
 
     @Override

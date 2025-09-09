@@ -1,6 +1,7 @@
 package com.togithub.effectivemobilejavatask.controller;
 
 import com.togithub.effectivemobilejavatask.dto.CardDTO;
+import com.togithub.effectivemobilejavatask.dto.CreateCardDTO;
 import com.togithub.effectivemobilejavatask.dto.RequestForBlockingDTO;
 import com.togithub.effectivemobilejavatask.dto.UserDTO;
 import com.togithub.effectivemobilejavatask.entity.Card;
@@ -9,7 +10,6 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;;import java.util.List;
@@ -42,10 +42,16 @@ public class CardController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/allCardsByUsername")
+    public List<CardDTO> getAllCards(@RequestParam String username) {
+        return cardService.findAllCardsUserByUsername(username);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<CardDTO> createCard(@RequestBody CardDTO cardDTO,
-                                              Authentication authentication) {
-        String username = authentication.getName();
+    public ResponseEntity<CardDTO> createCard(@RequestBody CreateCardDTO cardDTO,
+                                              @RequestParam String username) {
+
         CardDTO saved = cardService.createCard(cardDTO, username);
         return ResponseEntity.ok(saved);
     }

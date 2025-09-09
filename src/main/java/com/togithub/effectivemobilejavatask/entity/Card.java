@@ -1,6 +1,7 @@
 package com.togithub.effectivemobilejavatask.entity;
 
 
+import com.togithub.effectivemobilejavatask.entity.Enums.CardStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

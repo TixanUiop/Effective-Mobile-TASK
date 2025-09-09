@@ -1,23 +1,25 @@
 package com.togithub.effectivemobilejavatask.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class CardDTO {
-    private Long id;
+public class TransferCardFromDTO {
+    @NotBlank
     private String number;
+
+    @NotBlank
     private String owner;
+
+    @NotNull
     private LocalDate expiryDate;
-    private String status;
-    private BigDecimal balance;
-    private UserDTO user;
 }

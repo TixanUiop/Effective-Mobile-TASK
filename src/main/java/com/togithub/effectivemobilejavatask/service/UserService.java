@@ -1,14 +1,15 @@
 package com.togithub.effectivemobilejavatask.service;
 
+import com.togithub.effectivemobilejavatask.dto.CreateUserDTO;
+import com.togithub.effectivemobilejavatask.dto.UpdateUserDTO;
 import com.togithub.effectivemobilejavatask.dto.UserDTO;
-import com.togithub.effectivemobilejavatask.entity.User;
 
 import java.util.List;
 
 public interface UserService {
-    UserDTO createUser(User user);
+    UserDTO createUser(CreateUserDTO user);
     UserDTO getUserById(Long id);
     List<UserDTO> getAllUsers();
-    UserDTO updateUser(User user);
+    UserDTO updateUser(UpdateUserDTO user);
     void deleteUser(Long id);
 }
