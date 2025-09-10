@@ -10,11 +10,12 @@ import com.togithub.effectivemobilejavatask.entity.Card;
 import com.togithub.effectivemobilejavatask.entity.Enums.CardStatus;
 import com.togithub.effectivemobilejavatask.entity.Enums.Role;
 import com.togithub.effectivemobilejavatask.entity.User;
+import com.togithub.effectivemobilejavatask.unit.GlobalFields;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-//will not use MapStruct.
+//will not use MapStruct for Task
 @Component
 @RequiredArgsConstructor
 public class Mapper {
@@ -81,7 +82,7 @@ public class Mapper {
 
     private String maskCardNumber(String number) {
         if (number.length() >= 4) {
-            return "**** **** **** " + number.substring(number.length() - 4);
+            return GlobalFields.MASK + number.substring(number.length() - 4);
         }
         return number;
     }
