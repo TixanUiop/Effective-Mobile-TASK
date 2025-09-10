@@ -1,17 +1,19 @@
 package com.togithub.effectivemobilejavatask.exception;
 
 
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-
-@ControllerAdvice
+@Hidden
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     private ResponseEntity<Object> buildResponse(String message, HttpStatus status) {
@@ -23,6 +25,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, status);
     }
 
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Object> handleAccessDenied(AccessDeniedException ex) {
+        return buildResponse("Access denied: " + ex.getMessage(), HttpStatus.FORBIDDEN);
+    }
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<Object> handleUserAlreadyExists(UserAlreadyExistsException ex) {
         return buildResponse(ex.getMessage(), HttpStatus.CONFLICT); // 409

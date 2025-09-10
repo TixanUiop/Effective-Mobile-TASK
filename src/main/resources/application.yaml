@@ -1,12 +1,11 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:bankdb;DB_CLOSE_DELAY=-1
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:postgresql://db:5432/mydb
+    username: username
+    password: password
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: none
-    show-sql: true
+      ddl-auto: update
   liquibase:
-    change-log: classpath:db/changelog/master.xml
+    enabled: false

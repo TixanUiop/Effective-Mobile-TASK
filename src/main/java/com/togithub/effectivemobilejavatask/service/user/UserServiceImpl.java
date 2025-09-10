@@ -4,6 +4,7 @@ import com.togithub.effectivemobilejavatask.dto.user.CreateUserDTO;
 import com.togithub.effectivemobilejavatask.dto.user.UpdateUserDTO;
 import com.togithub.effectivemobilejavatask.dto.user.UserDTO;
 import com.togithub.effectivemobilejavatask.entity.User;
+import com.togithub.effectivemobilejavatask.exception.UserNotFoundException;
 import com.togithub.effectivemobilejavatask.mapper.Mapper;
 import com.togithub.effectivemobilejavatask.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO getUserById(Long id) {
         return userRepository.findById(id)
                 .map(mapper::toUserDTO)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 
     @Override
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDTO updateUser(UpdateUserDTO userDto) {
         User existingUser = userRepository.findById(userDto.getId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         existingUser.setUsername(userDto.getUsername());
         if (userDto.getPassword() != null) {
