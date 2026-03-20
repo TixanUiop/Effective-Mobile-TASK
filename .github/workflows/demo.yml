@@ -1,0 +1,9 @@
+name: demo
+on: workflow_dispatch
+jobs:
+  pring: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: print to console
+        run: echo Hello demo CICD
+        
